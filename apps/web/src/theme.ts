@@ -28,10 +28,9 @@ import SettingsStore from "./settings/SettingsStore";
 import ThemeWatcher from "./settings/watchers/ThemeWatcher";
 import { FontWatcher } from "./settings/watchers/FontWatcher";
 
-export const DEFAULT_THEME = "light";
-const HIGH_CONTRAST_THEMES: Record<string, string> = {
-    light: "light-high-contrast",
-};
+// Chator: removed DEFAULT_THEME and HIGH_CONTRAST_THEMES (built-in themes removed)
+export const DEFAULT_THEME = "custom-light";
+const HIGH_CONTRAST_THEMES: Record<string, string> = {};
 
 interface IFontFaces extends Omit<Record<(typeof allowedFontFaceProps)[number], string>, "src"> {
     src: {
@@ -87,11 +86,9 @@ export function isHighContrastTheme(theme: string): boolean {
 }
 
 export function enumerateThemes(): { [key: string]: string } {
-    const BUILTIN_THEMES = {
-        "light": _t("common|light"),
-        "light-high-contrast": _t("theme|light_high_contrast"),
-        "dark": _t("common|dark"),
-    };
+    // Chator: removed built-in themes (light, dark, light-high-contrast)
+    // Only custom themes from config.json are shown
+    const BUILTIN_THEMES = {};
     const customThemes = SettingsStore.getValue("custom_themes") || [];
     const customThemeNames: Record<string, string> = {};
 
